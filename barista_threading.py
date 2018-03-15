@@ -59,20 +59,22 @@ def set_time(time):
 
 @ask.intent('SetTimerIntent', mapping={'quantity':'quantity', 'units':'units'})
 def set_timer(quantity, units):
-	TIMER = timer_thread(name="timer {}".format(NUM_OF_TIMERS))
+	
 	if units == "seconds" or units=="second":
-		TIMER.start(quantity)
+		#TIMER.start(quantity)
+		pass
 
     	elif units == "minute" or units=="minutes":
-		secConv = int(quantity) * 60
-		TIMER.start(secConv)
+		quantity = int(quantity) * 60
+		#TIMER.start(secConv)
  	elif units == "hours" or units=="hour":
-        	secConv = int(quantity) * 3600
+        	quantity = int(quantity) * 3600
         	#if starting instead of duration:
-        	TIMER.start(secConv)
+        	#TIMER.start(secConv)
 	else:
 		return statement("Please try again")
-
+	TIMER = timer_thread(name="timer {}".format(NUM_OF_TIMERS),args=(quantity))
+	TIMER.start()
 	return statement("coffee will brew in {} {}".format(quantity, units))
 
 
