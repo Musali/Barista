@@ -15,19 +15,19 @@ ask = Ask(app, '/')
 
 
 
-class timer_thread(threading.Thread):
-	def run(self, timedelta=0):
-		global NUM_OF_TIMERS
-		if NUM_OF_TIMERS < 5:
-			NUM_OF_TIMERS = NUM_OF_TIMERS + 1
-			print ("timer started")
-			time.sleep(timedelta)
-			print ("coffee on")
-			GPIO.output(4,True)
-			time.sleep(15)
-			NUM_OF_TIMERS = NUM_OF_TIMERS - 1
-			print ("coffee off")
-			GPIO.output(4,False)
+#class timer_thread(threading.Thread):
+def run(self, timedelta=0):
+	global NUM_OF_TIMERS
+	if NUM_OF_TIMERS < 5:
+		NUM_OF_TIMERS = NUM_OF_TIMERS + 1
+		print ("timer started")
+		time.sleep(timedelta)
+		print ("coffee on")
+		GPIO.output(4,True)
+		time.sleep(15)
+		NUM_OF_TIMERS = NUM_OF_TIMERS - 1
+		print ("coffee off")
+		GPIO.output(4,False)
 
 
 '''
@@ -78,7 +78,8 @@ def set_timer(quantity, units):
         	#TIMER.start(secConv)
 	else:
 		return statement("Please try again")
-	TIMER = timer_thread(name="timer {}".format(NUM_OF_TIMERS),args=(quantity))
+	#TIMER = timer_thread(name="timer {}".format(NUM_OF_TIMERS),args=(quantity))
+	TIMER = threading.Thread(target=run,args=(quantity))
 	TIMER.start()
 	return statement("coffee will brew in {} {}".format(quantity, units))
 
