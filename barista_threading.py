@@ -2,8 +2,8 @@ from flask import Flask
 from flask_ask import Ask, statement, convert_errors, convert
 import RPi.GPIO as GPIO
 import logging
-#from __future__ import print_function
-#import threading
+from __future__ import print_function
+import threading
 import time
 
 GPIO.setmode(GPIO.BCM)
@@ -63,13 +63,13 @@ def set_timer(quantity, units):
 	if units == "seconds" or units=="second":
 		TIMER.start(quantity)
 
-    elif units == "minute" or units=="minutes":
+    	elif units == "minute" or units=="minutes":
 		secConv = int(quantity) * 60
 		TIMER.start(secConv)
  	elif units == "hours" or units=="hour":
-        secConv = int(quantity) * 3600
-        #if starting instead of duration:
-        TIMER.start(secConv)
+        	secConv = int(quantity) * 3600
+        	#if starting instead of duration:
+        	TIMER.start(secConv)
 	else:
 		return statement("Please try again")
 
@@ -86,4 +86,4 @@ def turn_on():
 def turn_off():
 	GPIO.output(4,False)
 
-return statement('Coffee pot is off')
+	return statement('Coffee pot is off')
