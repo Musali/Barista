@@ -1,9 +1,9 @@
+from __future__ import print_function
+import threading
 from flask import Flask
 from flask_ask import Ask, statement, convert_errors, convert
 import RPi.GPIO as GPIO
 import logging
-from __future__ import print_function
-import threading
 import time
 
 GPIO.setmode(GPIO.BCM)
