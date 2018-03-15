@@ -65,9 +65,9 @@ def set_time(time):
 @ask.intent('SetTimerIntent', mapping={'quantity':'quantity', 'units':'units'})
 def set_timer(quantity, units):
 	
+	Oquantity = quantity
 	if units == "seconds" or units=="second":
-		#TIMER.start(quantity)
-		pass
+		quantity = int(quantity)
 
     	elif units == "minute" or units=="minutes":
 		quantity = int(quantity) * 60
@@ -81,7 +81,7 @@ def set_timer(quantity, units):
 	#TIMER = timer_thread(name="timer {}".format(NUM_OF_TIMERS),args=(quantity))
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
-	return statement("coffee will brew in {} {}".format(quantity, units))
+	return statement("coffee will brew in {} {}".format(Oquantity, units))
 
 
 @ask.intent('OnIntent')
