@@ -16,7 +16,7 @@ ask = Ask(app, '/')
 
 
 #class timer_thread(threading.Thread):
-def run(self, timedelta=0):
+def run(timedelta=0):
 	global NUM_OF_TIMERS
 	if NUM_OF_TIMERS < 5:
 		NUM_OF_TIMERS = NUM_OF_TIMERS + 1
@@ -79,7 +79,7 @@ def set_timer(quantity, units):
 	else:
 		return statement("Please try again")
 	#TIMER = timer_thread(name="timer {}".format(NUM_OF_TIMERS),args=(quantity))
-	TIMER = threading.Thread(target=run,args=(quantity))
+	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
 	return statement("coffee will brew in {} {}".format(quantity, units))
 
