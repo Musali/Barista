@@ -17,6 +17,7 @@ ask = Ask(app, '/')
 
 class timer_thread(threading.Thread):
 	def run(self, timedelta=0):
+		global NUM_OF_TIMERS
 		if NUM_OF_TIMERS < 5:
 			NUM_OF_TIMERS = NUM_OF_TIMERS + 1
 			time.sleep(timedelta)
