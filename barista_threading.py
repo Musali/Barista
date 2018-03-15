@@ -8,10 +8,11 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4,GPIO.OUT)
+NUM_OF_TIMERS = 0
 
 app = Flask(__name__)
 ask = Ask(app, '/')
-NUM_OF_TIMERS = 0
+
 
 
 class timer_thread(threading.Thread):
