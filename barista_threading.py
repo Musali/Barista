@@ -20,10 +20,13 @@ class timer_thread(threading.Thread):
 		global NUM_OF_TIMERS
 		if NUM_OF_TIMERS < 5:
 			NUM_OF_TIMERS = NUM_OF_TIMERS + 1
+			print "timer started"
 			time.sleep(timedelta)
+			print "coffee on"
 			GPIO.output(4,True)
 			time.sleep(15)
 			NUM_OF_TIMERS = NUM_OF_TIMERS - 1
+			print "coffee off"
 			GPIO.output(4,False)
 
 
