@@ -14,7 +14,7 @@ ask = Ask(app, '/')
 NUM_OF_TIMERS = 0
 
 
-class timer_thread(threading.thread):
+class timer_thread(threading.Thread):
 	def run(self, timedelta=0):
 		if NUM_OF_TIMERS < 5:
 			NUM_OF_TIMERS = NUM_OF_TIMERS + 1
