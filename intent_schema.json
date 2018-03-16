@@ -1,0 +1,77 @@
+{
+    "languageModel": {
+        "invocationName": "barista",
+        "intents": [
+            {
+                "name": "OnIntent",
+                "slots": [],
+                "samples": [
+                    "to brew"
+                ]
+            },
+            {
+                "name": "OffIntent",
+                "slots": [],
+                "samples": [
+                    "to stop"
+                ]
+            },
+            {
+                "name": "SetTimeIntent",
+                "slots": [
+                    {
+                        "name": "settime",
+                        "type": "AMAZON.TIME"
+                    }
+                ],
+                "samples": [
+                    "to brew at {settime}"
+                ]
+            },
+            {
+                "name": "SetTimerIntent",
+                "slots": [
+                    {
+                        "name": "quantity",
+                        "type": "AMAZON.NUMBER"
+                    },
+                    {
+                        "name": "units",
+                        "type": "units"
+                    }
+                ],
+                "samples": [
+                    "to start in {quantity} {units}"
+                ]
+            }
+        ],
+        "types": [
+            {
+                "name": "units",
+                "values": [
+                    {
+                        "id": "",
+                        "name": {
+                            "value": "hours",
+                            "synonyms": []
+                        }
+                    },
+                    {
+                        "id": "",
+                        "name": {
+                            "value": "seconds",
+                            "synonyms": []
+                        }
+                    },
+                    {
+                        "id": "",
+                        "name": {
+                            "value": "minutes",
+                            "synonyms": []
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
