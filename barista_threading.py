@@ -4,7 +4,7 @@ from flask import Flask
 from flask_ask import Ask, statement, convert_errors, convert
 import RPi.GPIO as GPIO
 import logging
-import time
+import time as tm
 from datetime import datetime as dt
 
 GPIO.setmode(GPIO.BCM)
@@ -22,10 +22,10 @@ def run(timedelta=0):
 	if NUM_OF_TIMERS < 5:
 		NUM_OF_TIMERS = NUM_OF_TIMERS + 1
 		print ("timer started")
-		time.sleep(timedelta)
+		tm.sleep(timedelta)
 		print ("coffee on")
 		GPIO.output(4,True)
-		time.sleep(15)
+		tm.sleep(15)
 		NUM_OF_TIMERS = NUM_OF_TIMERS - 1
 		print ("coffee off")
 		GPIO.output(4,False)
@@ -58,7 +58,7 @@ def gpio_control(status, pin):
     if status in ['off', 'low']:    GPIO.output(pinNum, GPIO.LOW)
     return statement('Turning pin {} {}'.format(pin, status))
 '''
-@ask.intent('SetTimeIntent', mapping={'settime':'time'}, convert={'on_time':'time'})
+@ask.intent('SetTimeIntent', ''' mapping={'settime':'time'},''' convert={'on_time':'time'})
 def set_time(on_time):
 	#---NEEDS TESTING -----------------------------------
 	time_now = dt.now()
