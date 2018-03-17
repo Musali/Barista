@@ -5,7 +5,7 @@ from flask_ask import Ask, statement, convert_errors, convert
 import RPi.GPIO as GPIO
 import logging
 import time as tm
-from datetime import datetime as dt
+from datetime import datetime
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4,GPIO.OUT)
@@ -62,7 +62,7 @@ def gpio_control(status, pin):
 @ask.intent('SetTimeIntent', convert={'on_time':'time'})
 def set_time(on_time):
 	#---NEEDS TESTING -----------------------------------
-	time_now = dt.now()
+	time_now = datetime.now()
 	quantity = (on_time - time_now).total_seconds()
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
