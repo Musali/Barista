@@ -68,7 +68,7 @@ def set_time(on_time):
 	quantity = 6
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
-	return statement("coffee will brew at {}".format(request.type))
+	return statement("coffee will brew at {}".format(request.intent.slots.settime.value))
 	# ---------------------------------------------------
 	#pass
 
