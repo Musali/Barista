@@ -1,7 +1,7 @@
 from __future__ import print_function
 import threading
 from flask import Flask
-from flask_ask import Ask, statement, convert_errors, convert
+from flask_ask import Ask, request, statement, convert_errors, convert
 import RPi.GPIO as GPIO
 import logging
 import time as tm
@@ -58,12 +58,14 @@ def gpio_control(status, pin):
     if status in ['off', 'low']:    GPIO.output(pinNum, GPIO.LOW)
     return statement('Turning pin {} {}'.format(pin, status))
 '''
-''' mapping={'settime':'time'},'''
-@ask.intent('SetTimeIntent', convert={'on_time':'time'})
+''' convert={'on_time':'time'} '''
+
+@ask.intent('SetTimeIntent', mapping={'settime':'time'})
 def set_time(on_time):
 	#---NEEDS TESTING -----------------------------------
 	time_now = datetime.now()
 	#quantity = (on_time - time_now).total_seconds()
+	print ((((request.intent).slots).settime).value)
 	quantity = 6
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
