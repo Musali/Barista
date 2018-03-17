@@ -21,7 +21,7 @@ def run(timedelta=0):
 	global NUM_OF_TIMERS
 	if NUM_OF_TIMERS < 5:
 		NUM_OF_TIMERS = NUM_OF_TIMERS + 1
-		print ("timer started")
+		print ("timer started for {}".format(timedelta))
 		tm.sleep(timedelta)
 		print ("coffee on")
 		GPIO.output(4,True)
