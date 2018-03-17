@@ -34,7 +34,7 @@ def parse_duration(duration):
 	quantity = 0
 	duration = duration[1:]
 	T_value = duration.find("T")
-	if int(duration[0]) in list(range(10)):
+	if duration[0] != 'T':
 	# <1 day in advance
 		year = duration.find("Y")
 		if year > -1:
@@ -50,6 +50,7 @@ def parse_duration(duration):
 			duration = duration[day + 1:]
 	# >1 day in advance
 	if T_value > -1:
+		duration = duration[T_value+1:]
 		hour = duration.find("H")
 		if hour > -1:
 			quantity = quantity + int(duration[:hour])*3600
