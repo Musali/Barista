@@ -64,7 +64,7 @@ def set_time(on_time):
 	#---NEEDS TESTING -----------------------------------
 	time_now = datetime.now()
 	#quantity = (on_time - time_now).total_seconds()
-	quantity = time_now.total_seconds() + 4
+	quantity = 6
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
 	return statement("coffee will brew at {}".format(on_time))
