@@ -5,7 +5,7 @@ from flask_ask import Ask, statement, convert_errors, convert
 import RPi.GPIO as GPIO
 import logging
 import time
-import datetime as dt
+from datetime import datetime as dt
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4,GPIO.OUT)
