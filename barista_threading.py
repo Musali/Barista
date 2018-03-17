@@ -60,8 +60,8 @@ def gpio_control(status, pin):
 '''
 ''' convert={'on_time':'time'} '''
 
-@ask.intent('SetTimeIntent', mapping={'settime':'time'})
-def set_time(on_time):
+@ask.intent('SetTimeIntent', mapping={'settime':'on_time','setdate':'on_date'})
+def set_time(on_time,on_date):
 	#---NEEDS TESTING -----------------------------------
 	time_now = datetime.now()
 	#quantity = (on_time - time_now).total_seconds()
