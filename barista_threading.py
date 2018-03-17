@@ -30,7 +30,39 @@ def run(timedelta=0):
 		print ("coffee off")
 		GPIO.output(4,False)
 
-
+def parse_duration(duration):
+	quantity = 0
+	duration = duration[1:]
+	T_value = duration.find("T")
+	if int(duration[0]) in list(range(10)):
+	# <1 day in advance
+		year = duration.find("Y")
+		if year > -1:
+			quantity = quantity + int(duration[:year])*365*24*3600
+			duration = duration[year + 1:]
+		mnth = duration.find("M")
+		if mnth > -1 and mnth < T_value:
+			quantity = quantity + int(duration[:mnth])*30*24*3600
+			duration = duration[mnth + 1:]
+		day  = duration.find("D")
+		if day > -1:
+			quantity = quantity + int(duration[:day])*24*3600
+			duration = duration[day + 1:]
+	# >1 day in advance
+	if T_value > -1:
+		hour = duration.find("H")
+		if hour > -1:
+			quantity = quantity + int(duration[:hour])*3600
+			duration = duration[hour + 1:]
+		mnt = duration.find("M")
+		if mnt > -1:
+			quantity = quantity + int(duration[:mnt])*60
+			duration = duration[mnt+1:]
+		sec = duration.find("S")
+		if sec > -1:
+			quantity = quantity + int(duration[:sec])
+		
+	return quantity
 '''
 so now we do:
   Timer = timer_thread(name="timer {}".format(timer_number))
@@ -71,7 +103,7 @@ def set_time(on_time,on_date):
 	return statement("coffee will brew at {}".format(request.intent.slots.settime.value))
 	# ---------------------------------------------------
 	#pass
-
+'''
 @ask.intent('SetTimerIntent', mapping={'quantity':'quantity', 'units':'units'})
 def set_timer(quantity, units):
 	
@@ -92,7 +124,21 @@ def set_timer(quantity, units):
 	TIMER = threading.Thread(target=run,args=(quantity,))
 	TIMER.start()
 	return statement("coffee will brew in {} {}".format(Oquantity, units))
+'''
+@ask.intent('SetTimerIntent', mapping={'duration':'duration'})
+def set_timer(duration):
+	duration = request.intent.slots.duration.value
+	if duration[0] == 'P':
+		quantity = parse_duration(duration)
+		if quantity == 0:
+			return statement("please try again")
+		TIMER = threading.Thread(target=run,args=(quantity,))
+		TIMER.start()
+		return statement("coffee will brew in {}".format(duration))
 
+	else:
+		return statement("please try again")
+		
 
 @ask.intent('OnIntent')
 def turn_on():
