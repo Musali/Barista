@@ -58,7 +58,8 @@ def gpio_control(status, pin):
     if status in ['off', 'low']:    GPIO.output(pinNum, GPIO.LOW)
     return statement('Turning pin {} {}'.format(pin, status))
 '''
-@ask.intent('SetTimeIntent', ''' mapping={'settime':'time'},''' convert={'on_time':'time'})
+''' mapping={'settime':'time'},'''
+@ask.intent('SetTimeIntent', convert={'on_time':'time'})
 def set_time(on_time):
 	#---NEEDS TESTING -----------------------------------
 	time_now = dt.now()
