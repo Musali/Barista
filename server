@@ -1,0 +1,4 @@
+#!/bin/bash
+git pull
+export FLASK_APP=$1
+python -m flask run
